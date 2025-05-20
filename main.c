@@ -88,14 +88,9 @@ int main(void) {
     FILE *rom1 = fopen("../MICROCODE1","w+");
     FILE *rom2 = fopen("../MICROCODE2","w+");
     for (int i = 0; i < 16; ++i) {
-        for (int j = 0; j < 8; ++j) {
-            instructions[i+16][j] = instructions[i][j];
-            instructions[i+32][j] = instructions[i][j];
-            instructions[i+48][j] = instructions[i][j];
-            instructions[i+64][j] = instructions[i][j];
-            instructions[i+80][j] = instructions[i][j];
-            instructions[i+96][j] = instructions[i][j];
-            instructions[i+112][j] = instructions[i][j];
+	    for(int k = 1; k < 8; ++k){
+            memcpy(instructions[i|(k << 4)],instructions[i],sizeof(instructions[0]));
+            memcpy(extra_instructions[i|(k << 4)],extra_instructions[i],sizeof(extra_instructions[0]));
         }
     }
     instructions[JZ|(ZF)][2] = IO|J;
@@ -115,18 +110,6 @@ int main(void) {
     instructions[READ|(IF|ZF)][2] = AI;
     instructions[READ|(IF|CF)][2] = AI;
     instructions[READ|(IF|CF|ZF)][2] = AI;
-    for (int i = 0; i < 16; ++i) {
-        for (int j = 0; j < 8; ++j) {
-            extra_instructions[i+16][j] = extra_instructions[i][j];
-            extra_instructions[i+32][j] = extra_instructions[i][j];
-            extra_instructions[i+48][j] = extra_instructions[i][j];
-            extra_instructions[i+64][j] = extra_instructions[i][j];
-            extra_instructions[i+80][j] = extra_instructions[i][j];
-            extra_instructions[i+96][j] = extra_instructions[i][j];
-            extra_instructions[i+112][j] = extra_instructions[i][j];
-        }
-    }
-
     extra_instructions[READ|(IF)][2] = KBO|FI;
     extra_instructions[READ|(IF|ZF)][2] = KBO|FI;
     extra_instructions[READ|(IF|CF)][2] = KBO|FI;
