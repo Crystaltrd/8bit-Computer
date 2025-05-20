@@ -85,8 +85,8 @@ __uint16_t extra_instructions[16 * 8][8] = {
 };
 
 int main(void) {
-    FILE *rom1 = fopen("../MICROCODE1","w+");
-    FILE *rom2 = fopen("../MICROCODE2","w+");
+    FILE *rom1 = fopen("MICROCODE1","w+");
+    FILE *rom2 = fopen("MICROCODE2","w+");
     for (int i = 0; i < 16; ++i) {
 	    for(int k = 1; k < 8; ++k){
             memcpy(instructions[i|(k << 4)],instructions[i],sizeof(instructions[0]));
