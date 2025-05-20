@@ -1,7 +1,6 @@
 === OVERVIEW ===
 * 8-bit data width
-* 8-bit addressing [SXMX] for a total of 256bytes of RAM (16bytes
-if SX left untouched)
+* 8-bit addressing [SXMX] for a total of 256bytes of RAM (16bytes if SX left untouched)
 === INSTRUCTIONS ===
 
  0: NOP  
