@@ -1,24 +1,33 @@
 === OVERVIEW ===
 * 8-bit data width
 * 8-bit addressing [SXMX] for a total of 256bytes of RAM (16bytes if SX left untouched)
+=== ASSEMBLY ===
+* Anything after a ";" is considered a comment, whether a line starts with it, or is in the middle of one
+* A line of the form " @ ADDR VAL  " stores that specific value at the specified address
+* A line of the form " # ADDR  " basically tells the assembler that the next instruction will be placed in that address
 === INSTRUCTIONS ===
 
  0: NOP  
- 1: LDA  imm8	-> AX = [imm8]  
- 2: ADD^ imm8	-> BX = [imm8], AX = AX + BX 
- 3: SUB^ imm8 	-> BX = [imm8], AX = AX - BX 
- 4: JMP^ imm4	-> PC = imm8  
- 5: JZ   imm8	-> PC = imm8 if ZF = 1 else NOP
- 6: JC   imm8 	-> PC = imm8 if CF = 1 else NOP
- 7: LDS  imm8 	-> SX = imm8
+ 1: LDA   mem8	-> AX = [mem8]  
+ 2: ADD^  mem8	-> BX = [mem8], AX = AX + BX 
+ 3: SUB^  mem8 	-> BX = [mem8], AX = AX - BX 
+ 4: JMP^  imm4	-> PC = imm4  
+ 5: JZ    imm4	-> PC = imm4 if ZF = 1 else NOP
+ 6: JC    imm4 	-> PC = imm4 if CF = 1 else NOP
+ 7: LDS   imm4 	-> SX = imm4
  8: RND  	-> AX = RND 
- 9: STORE imm8	-> [imm8] = AX
- A: JNI  imm8	-> PC = imm8 if IF = 0 else NOP
+ 9: STORE mem8	-> [mem8] = AX
+ A: JNI   imm4	-> PC = imm4 if IF = 0 else NOP
  B: READ^ 	-> AX = keyboard input
  C: PRINT 	-> TTY = AX
  D: CLS		-> Clear TTY & Kb
  E: NS		-> PC = 0, SX++
  F: HLT		-> HALT
+
+* mem8 - a reference (pointer) to an 8-bit (byte) value.
+* imm4 - an immediate (i.e. included right in the instruction and thus invariable) 4-bit (byte) value.
+
+
 
 ^ these instructions load the (F)lags register
 === REGISTERS ===
