@@ -42,7 +42,7 @@
 #define JNI     0b1010
 #define READ    0b1011
 #define PRINT   0b1100
-// EMPTY
+#define CLS 	0b1101
 #define NS      0b1110
 #define HLT     0b1111
 

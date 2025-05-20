@@ -1,0 +1,38 @@
+=== OVERVIEW ===
+* 8-bit data width
+* 8-bit addressing [SXMX] for a total of 256bytes of RAM (16bytes
+if SX left untouched)
+=== INSTRUCTIONS ===
+
+ 0: NOP  
+ 1: LDA  imm8	-> AX = [imm8]  
+ 2: ADD^ imm8	-> BX = [imm8], AX = AX + BX 
+ 3: SUB^ imm8 	-> BX = [imm8], AX = AX - BX 
+ 4: JMP^ imm4	-> PC = imm8  
+ 5: JZ   imm8	-> PC = imm8 if ZF = 1 else NOP
+ 6: JC   imm8 	-> PC = imm8 if CF = 1 else NOP
+ 7: LDS  imm8 	-> SX = imm8
+ 8: RND  	-> AX = RND 
+ 9: STORE imm8	-> [imm8] = AX
+ A: JNI  imm8	-> PC = imm8 if IF = 0 else NOP
+ B: READ^ 	-> AX = keyboard input
+ C: PRINT 	-> TTY = AX
+ D: CLS		-> Clear TTY & Kb
+ E: NS		-> PC = 0, SX++
+ F: HLT		-> HALT
+
+^ these instructions load the (F)lags register
+=== REGISTERS ===
+AX: 	GP Register
+BX: 	Arithmetics Register
+MX: 	Memory address Register
+SX:	Segment register
+PC: 	Program counter
+RND:	Random Number Generator(Read Only)
+FR:	Flag Register(LSB to MSB)
+		ZF: Zero Flag
+		CF: Carry Flag
+		IF: Input Flag
+=== IO ===
+TTY:	 	Displays 7bit ASCII character
+Keyboard: 	Sends 7bit ASCII character IF = 1 if buffer is non empty	
